@@ -1,13 +1,219 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quiz-Game</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loto🏆</title>
+</head>
+<style>
+/* Global Styles */  
+body {  
+    font-family: Arial, sans-serif;  
+    line-height: 1.6;  
+    background-color: #f8f9fa;  
+    margin: 0;  
+    padding: 20px;  
+    color: #333;  
+}  
+
+/* Headings */  
+h1 {  
+    text-align: center;  
+    color: #4a90e2; /* A nice blue color */  
+}  
+
+h2, h3, h4, h5 {  
+    color: #555; /* Darker gray */  
+}  
+
+/* Profile Section */  
+.profile {  
+    background-color: hwb(0 69% 23%); /* White background for profile */  
+    border-radius: 8px;  
+    padding: 20px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    margin: 20px 0;  
+    text-align: center;  
+}  
+
+.profile img {  
+    max-width: 100px; /* Adjust image size */  
+    border-radius: 50%; /* Circular image */  
+    color: hsl(12, 83%, 50%);
+    
+}  
+
+.yaada, .ema, .phone {  
+    margin: 5px 0;  
+    font-size: 14px;  
+}  
+
+/* Button Styles */  
+.lakk-eyyee {  
+    display: flex;  
+    justify-content: center;  
+    gap: 20px;  
+    margin: 20px 0;  
+}  
+
+button {  
+    padding: 10px 20px;  
+    border: none;  
+    border-radius: 5px;  
+    cursor: pointer;  
+    font-size: 16px;  
+    transition: background-color 0.3s ease;  
+}  
+
+.yes {  
+    background-color: #4caf50; /* Green for Yes */  
+    color: white;  
+}  
+
+.no {  
+    background-color: #f44336; /* Red for No */  
+    color: white;  
+}  
+
+button:hover {  
+    opacity: 0.8; /* Slightly fade on hover */  
+}  
+
+/* Form Styles */  
+.forms {  
+    background-color: #ffffff;  
+    border-radius: 8px;  
+    padding: 20px;  
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  
+    margin-top: 20px;  
+}  
+
+.form-contener {  
+    display: flex;  
+    flex-direction: column;  
+}  
+
+input[type="text"],  
+input[type="email"],  
+textarea {  
+    padding: 10px;  
+    border: 1px solid #ccc;  
+    border-radius: 5px;  
+    margin-bottom: 5px;  
+}  
+
+input[type="checkbox"] {  
+    margin-top: 10px;  
+}  
+
+.form-button {  
+    background-color: #007bff; /* Bootstrap primary color */  
+    color: white;  
+    border: none;  
+    padding: 10px;  
+    border-radius: 5px;  
+}  
+
+.form-button:hover {  
+    background-color: #0056b3; /* Darker blue on hover */  
+}  
+
+/* Miscellaneous */  
+#result {  
+    margin-top: 20px;  
+    font-size: 16px;  
+}
+</style>
+<body>
+    <h1>Welcome to Loto🏆</h1>
+    <div class="profile">
+        <img src="sabo.jpg" alt="">
+        <p class="yaada">Yaada barbaadan naa gafachuu dandessu</p>
+        <p class="yaada">Waa'ee Lotorii kanaa</p>
+        <p class="ema">Email:sabonamarara53@gmail.com</p>
+        <p class="phone">phone:0928629040</p>
+    </div>
+    <h5>Lotoriin kun Namota kafalani irratti hunda'uun </h5>
+    <h5>Gaafa Jimaata Baha Kanaafuu caarraa keessan Yaalaa!</h5>
+    <div class="conteners">
+        <h2>Odefannoo Armaan Gadii hunda Guuti</h2>
+        <h3>Lotorii Birri 5 Qofaan carraa Ke Yaaluu Barbaada?</h3>
+        <div class="lakk-eyyee">
+            <button onclick="eeyyee()" class="yes" id="tole">Eeyyee</button>
+            <button onclick="shakkii()" class="no" id="laki">Lakkii</button>
+            <h4 id="shakkii"></h4>
+        </div>
+       
+        <div class="forms">
+<h3 id="form-guti"></h3>
+   <form class="form-contener" method="POST" id="form">
+        <input class="" type="hidden" name="access_key" value="fb157278-c020-42dd-bd36-1f503b4fd21b">
+        <label for="name">Maqaa Gutuu</label><br>
+        <input class="name-user " type="text" name="name" required placeholder="Maqaa Gutuu"><br><br>
+        <label for="email">Emalii Kee</label><br>
+        <input class="you-email" type="email" name="email" required placeholder="Emalii Kee barreesi"><br><br>
+        <label for="comment">Yaada Yoo qabatan</label><br>
+        <textarea class="form-text" name="message" required placeholder="Yaada Yoo qabatan ykn Gaafii barreesi"></textarea><br><br>
+        <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+        <button class="form-button" type="submit">Galmeesi</button>
+        <div id="result"></div>
+      </form>
+        </div>
+        <p id="verify"></p>
+       
+    </div>
+    <script>
+        const form = document.getElementById('form');
+        const result = document.getElementById('result');
+    
+        form.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const formData = new FormData(form);
+          const object = Object.fromEntries(formData);
+          const json = JSON.stringify(object);
+          result.innerHTML = "Please wait..."
+    
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: json
+          })
+            .then(async (response) => {
+              let json = await response.json();
+              if (response.status == 200) {
+                result.innerHTML = "Galmofteeta✔️";
+              } else {
+                console.log(response);
+                result.innerHTML = json.message;
+              }
+            })
+            .catch(error => {
+              console.log(error);
+              result.innerHTML = "Rakkon jira irra debi'ii!";
+            })
+            .then(function () {
+              form.reset();
+              setTimeout(() => {
+                result.style.display = "none";
+              }, 3000);
+            });
+        });
+        let CBE='CBE 1000568306442  Sabona Marara Balata';
+        let COOP='COOP 1046900054606 Sabona Marara Balata'
+        let phone="0928629040"
+        function eeyyee(){
+            document.getElementById('tole').innerHTML=` ${CBE}\n ${COOP} `;
+            document.getElementById('form-guti').innerHTML=` formii kanaa gadii guuti`
+            document.getElementById('verify').innerHTML=`Yeroo mursaa boda codiin isinii ergama eega !`;
+        }
+        function shakkii(){
+            document.getElementById('shakkii').innerHTML=`yoo Amantaa dhabdan kana mirkaneesaa\n ${phone}`;
+           
+        }
+    </script>
+    
+</body>
 </html>
